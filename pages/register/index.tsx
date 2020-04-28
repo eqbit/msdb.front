@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Field  } from 'formik';
+import { Formik, Field, FormikHelpers } from 'formik';
 import Layout from '../../src/components/Layout';
 import { withApollo } from '../../lib/apollo';
 import { RegisterComponent } from '../../src/generated/types.d';
@@ -23,14 +23,28 @@ const Register = () => {
     <Layout title="Register page">
       <RegisterComponent>
         {(register) => {
-          const onSubmit = async (data: Values) => {
-            const response = await register({
-              variables: {
-                data
-              }
-            });
+          const onSubmit = async (data: Values, { setErrors }: FormikHelpers<Values>) => {
+            try {
+              const response = await register({
+                variables: {
+                  data
+                }
+              });
   
-            console.log(response);
+              console.log(response);
+            } catch (error) {
+              const errors: Record<string, string> = {};
+              const validationErrors = error.graphQLErrors[0].extensions.exception.validationErrors;
+              
+              validationErrors.forEach((validationError: any) => {
+                Object.values(validationError.constraints).forEach((constraint: any) => {
+                  errors[validationError.property] = constraint;
+                })
+              });
+  
+              console.log(errors);
+              setErrors(errors);
+            }
           };
           
           return (
