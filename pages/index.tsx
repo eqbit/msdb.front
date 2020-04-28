@@ -4,20 +4,26 @@ import { withApollo } from '../lib/apollo'
 import Layout from '../src/components/Layout'
 import { LoginComponent } from '../src/generated/types.d';
 
-const Button = ({ mutate }: any) => {
-  const handleLogin = async () => {
-    const response = await mutate({
-      variables: {
-        email: 'test3@test.test',
-        password: 'testsetse'
-      }
-    });
-  
-    console.log(response);
-  };
-  
+const Button = () => {
   return (
-    <button onClick={handleLogin}>login</button>
+    <LoginComponent>
+      {
+        (mutate) => {
+          const handleLogin = async () => {
+            const response = await mutate({
+              variables: {
+                email: 'test3@test.test',
+                password: 'testsetse'
+              }
+            });
+    
+            console.log(response.data?.login);
+          };
+          
+          return <button onClick={handleLogin}>login</button>
+        }
+      }
+    </LoginComponent>
   )
 };
 
@@ -28,13 +34,7 @@ const Home = () => {
     <Layout title="MSDB app">
       <h1>Hello World 👋</h1>
       <p>
-        <LoginComponent>
-          {
-            (mutate) => (
-              <Button mutate={mutate}/>
-            )
-          }
-        </LoginComponent>
+        <Button/>
       </p>
     </Layout>
   );
