@@ -1,13 +1,14 @@
 import React from 'react';
+import { withApollo } from '../lib/apollo'
 
 import Layout from '../src/components/Layout'
 import { LoginComponent } from '../src/generated/types.d';
 
-const Button = ({ mutate }) => {
+const Button = ({ mutate }: any) => {
   const handleLogin = async () => {
     const response = await mutate({
       variables: {
-        email: 'test@test.test',
+        email: 'test3@test.test',
         password: 'testsetse'
       }
     });
@@ -39,4 +40,4 @@ const Home = () => {
   );
 };
 
-export default Home
+export default withApollo({ ssr: true })(Home);
