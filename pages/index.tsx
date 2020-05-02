@@ -12,8 +12,8 @@ const Button = () => {
           const handleLogin = async () => {
             const response = await mutate({
               variables: {
-                email: 'test3@test.test',
-                password: 'testsetse'
+                email: 'fdhfgh@fdsfsd.fdg',
+                password: 'fdhfgh@fdsfsd.fdg'
               }
             });
     

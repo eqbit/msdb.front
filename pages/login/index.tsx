@@ -2,20 +2,16 @@ import React from 'react';
 import { Formik, Field, FormikHelpers } from 'formik';
 import Layout from '../../src/components/Layout';
 import { withApollo } from '../../lib/apollo';
-import { RegisterComponent } from '../../src/generated/types.d';
+import { LoginComponent } from '../../src/generated/types.d';
 import TextInput from '../../src/components/form/text-input';
 import { useRouter } from 'next/router';
 
 type Values = {
-  firstName: string;
-  lastName: string;
   email: string;
   password: string;
 };
 
 const initialValues: Values = {
-  firstName: '',
-  lastName: '',
   email: '',
   password: ''
 };
@@ -24,30 +20,23 @@ const Register = () => {
   const router = useRouter();
   
   return (
-    <Layout title="Register page">
-      <RegisterComponent>
-        {(register) => {
+    <Layout title="Login page">
+      <LoginComponent>
+        {(login) => {
           const onSubmit = async (data: Values, { setErrors }: FormikHelpers<Values>) => {
-            try {
-              await register({
-                variables: {
-                  data
-                }
-              });
-  
-              await router.push('/register/success');
-            } catch (error) {
-              const errors: Record<string, string> = {};
-              const validationErrors = error.graphQLErrors[0].extensions.exception.validationErrors;
-              
-              validationErrors.forEach((validationError: any) => {
-                Object.values(validationError.constraints).forEach((constraint: any) => {
-                  errors[validationError.property] = constraint;
-                })
+            const response = await login({
+              variables: data
+            });
+            
+            if (!response?.data?.login) {
+              setErrors({
+                email: 'Invalid email/password pair'
               });
               
-              setErrors(errors);
+              return;
             }
+  
+            await router.push('/');
           };
           
           return (
@@ -57,22 +46,6 @@ const Register = () => {
                    handleSubmit
                  }) => (
                   <form onSubmit={handleSubmit}>
-                    <Field
-                      name="firstName"
-                      placeholder="John"
-                      component={TextInput}
-                      label="First name"
-                      id="register-form-first-name"
-                    />
-                    
-                    <Field
-                      name="lastName"
-                      placeholder="Doe"
-                      component={TextInput}
-                      label="Last name"
-                      id="register-form-last-name"
-                    />
-                    
                     <Field
                       name="email"
                       placeholder="example@mail.com"
@@ -89,14 +62,14 @@ const Register = () => {
                       id="register-form-password"
                     />
                     
-                    <button type="submit">Register</button>
+                    <button type="submit">Login</button>
                   </form>
                 )
               }
             </Formik>
           );
         }}
-      </RegisterComponent>
+      </LoginComponent>
     </Layout>
   )
 };

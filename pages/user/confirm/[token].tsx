@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../../lib/apollo';
 import { PageContext } from '../../../src/types';
@@ -8,22 +8,24 @@ import {
 } from '../../../src/generated/types.d';
 import { confirmEmailMutation } from '../../../graphql/user/mutations/confirmEmail';
 import Layout from '../../../src/components/Layout';
+import { useRouter } from 'next/router';
 
 type Props = {
-  success?: boolean;
   error?: string | null;
 };
 
-const Confirm: NextPage<Props> = (props) => {
+const Confirm: NextPage<Props> = ({ error }) => {
+  const router = useRouter();
+  
+  useEffect(() => {
+    if (!error) {
+      router.push('/login');
+    }
+  });
+  
   return (
     <Layout title="Email confirmation">
-      {props.success ? (
-        <div>
-          success
-        </div>
-      ) : (
-        <div>{props.error}</div>
-      )}
+      <div>{error}</div>
     </Layout>
   )
 };
@@ -31,7 +33,6 @@ const Confirm: NextPage<Props> = (props) => {
 Confirm.getInitialProps = async ({ query: { token }, apolloClient }: PageContext): Promise<Props> => {
   if (!token) {
     return {
-      success: false,
       error: 'No token'
     };
   }
@@ -44,13 +45,17 @@ Confirm.getInitialProps = async ({ query: { token }, apolloClient }: PageContext
       }
     });
     
-    return {
-      success: response.data!.confirmEmail,
-      error: !response.data!.confirmEmail ? 'Email not found or token has expired' : null
+    if (!response.data?.confirmEmail) {
+      return {
+        error: 'Email not found or token has expired'
+      }
     }
+    
+    return {}
+    
+    
   } catch (error) {
     return {
-      success: false,
       error: 'Something went wrong'
     }
   }
