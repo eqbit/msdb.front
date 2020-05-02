@@ -22,6 +22,7 @@ const Layout: React.FunctionComponent<Props> = ({
           <Link href="/">
             <a>Home</a>
           </Link>
+          {' '}
           <Link href="/register">
             <a>Register</a>
           </Link>

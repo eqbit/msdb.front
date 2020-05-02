@@ -1,4 +1,13 @@
 
+declare module '*/confirmEmail.ts' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ConfirmEmail: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/login.ts' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
