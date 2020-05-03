@@ -6,6 +6,8 @@ import { LoggedQuery, LoginComponent } from '../../src/generated/types.d';
 import TextInput from '../../src/components/form/text-input';
 import { useRouter } from 'next/router';
 import { helloQuery } from '../../graphql/user/queries/hello';
+import { useDispatch } from 'react-redux';
+import { setUserLoggedStatus } from '../../src/redux/actions/user';
 
 type Values = {
   email: string;
@@ -19,6 +21,7 @@ const initialValues: Values = {
 
 const Register = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   
   return (
     <Layout title="Login page">
@@ -31,6 +34,8 @@ const Register = () => {
                 if (!data || !data.login) {
                   return;
                 }
+  
+                dispatch(setUserLoggedStatus(true));
                 
                 cache.writeQuery<LoggedQuery>({
                   query: helloQuery,
