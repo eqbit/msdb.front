@@ -37,6 +37,10 @@ const Layout: React.FunctionComponent<Props> = ({
               <a>Register</a>
             </Link>
             {' '}
+            <Link href="/forgot-password">
+              <a>Restore password</a>
+            </Link>
+            {' '}
             <Link href="/user/hello">
               <a>Hello</a>
             </Link>
