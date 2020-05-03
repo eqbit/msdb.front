@@ -2,9 +2,10 @@ import React from 'react';
 import { Formik, Field, FormikHelpers } from 'formik';
 import Layout from '../../src/components/Layout';
 import { withApollo } from '../../lib/apollo';
-import { LoginComponent } from '../../src/generated/types.d';
+import { LoggedQuery, LoginComponent } from '../../src/generated/types.d';
 import TextInput from '../../src/components/form/text-input';
 import { useRouter } from 'next/router';
+import { helloQuery } from '../../graphql/user/queries/hello';
 
 type Values = {
   email: string;
@@ -25,7 +26,20 @@ const Register = () => {
         {(login) => {
           const onSubmit = async (data: Values, { setErrors }: FormikHelpers<Values>) => {
             const response = await login({
-              variables: data
+              variables: data,
+              update: (cache, {data}) => {
+                if (!data || !data.login) {
+                  return;
+                }
+                
+                cache.writeQuery<LoggedQuery>({
+                  query: helloQuery,
+                  data: {
+                    __typename: 'Query',
+                    logged: data.login
+                  }
+                })
+              }
             });
             
             if (!response?.data?.login) {
