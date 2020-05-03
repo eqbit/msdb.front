@@ -18,22 +18,47 @@ const Layout: React.FunctionComponent<Props> = ({
     </Head>
     <div className="wrapper">
       <header>
-        <nav>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-          {' '}
-          <Link href="/register">
-            <a>Register</a>
-          </Link>
-        </nav>
+        <div style={
+          {
+            width: '1200px',
+            margin: 'auto'
+          }
+        }>
+          <nav>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
+            {' '}
+            <Link href="/login">
+              <a>Login</a>
+            </Link>
+            {' '}
+            <Link href="/register">
+              <a>Register</a>
+            </Link>
+            {' '}
+            <Link href="/user/hello">
+              <a>Hello</a>
+            </Link>
+          </nav>
+        </div>
       </header>
   
-      <div className="content">
+      <div className="content" style={
+        {
+          width: '1200px',
+          margin: '50px auto'
+        }
+      }>
         {children}
       </div>
   
-      <footer>
+      <footer style={
+        {
+          width: '1200px',
+          margin: 'auto'
+        }
+      }>
         <span>Footer</span>
       </footer>
     </div>

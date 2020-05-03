@@ -77,6 +77,19 @@ export type ChangePasswordInput = {
   token: Scalars['String'];
 };
 
+export type ChangePasswordMutationVariables = {
+  data: ChangePasswordInput;
+};
+
+
+export type ChangePasswordMutation = (
+  { __typename?: 'Mutation' }
+  & { changePassword?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name' | 'email'>
+  )> }
+);
+
 export type ConfirmEmailMutationVariables = {
   token: Scalars['String'];
 };
@@ -85,6 +98,16 @@ export type ConfirmEmailMutationVariables = {
 export type ConfirmEmailMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'confirmEmail'>
+);
+
+export type ForgotPasswordMutationVariables = {
+  email: Scalars['String'];
+};
+
+
+export type ForgotPasswordMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'restorePassword'>
 );
 
 export type LoginMutationVariables = {
@@ -114,7 +137,49 @@ export type RegisterMutation = (
   ) }
 );
 
+export type LoggedQueryVariables = {};
 
+
+export type LoggedQuery = (
+  { __typename?: 'Query' }
+  & { logged?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'name'>
+  )> }
+);
+
+
+export const ChangePasswordDocument = gql`
+    mutation ChangePassword($data: ChangePasswordInput!) {
+  changePassword(data: $data) {
+    id
+    name
+    email
+  }
+}
+    `;
+export type ChangePasswordMutationFn = ApolloReactCommon.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export type ChangePasswordComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<ChangePasswordMutation, ChangePasswordMutationVariables>, 'mutation'>;
+
+    export const ChangePasswordComponent = (props: ChangePasswordComponentProps) => (
+      <ApolloReactComponents.Mutation<ChangePasswordMutation, ChangePasswordMutationVariables> mutation={ChangePasswordDocument} {...props} />
+    );
+    
+export type ChangePasswordProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<ChangePasswordMutation, ChangePasswordMutationVariables>
+    } & TChildProps;
+export function withChangePassword<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ChangePasswordMutation,
+  ChangePasswordMutationVariables,
+  ChangePasswordProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, ChangePasswordMutation, ChangePasswordMutationVariables, ChangePasswordProps<TChildProps, TDataName>>(ChangePasswordDocument, {
+      alias: 'changePassword',
+      ...operationOptions
+    });
+};
+export type ChangePasswordMutationResult = ApolloReactCommon.MutationResult<ChangePasswordMutation>;
+export type ChangePasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const ConfirmEmailDocument = gql`
     mutation ConfirmEmail($token: String!) {
   confirmEmail(token: $token)
@@ -142,6 +207,33 @@ export function withConfirmEmail<TProps, TChildProps = {}, TDataName extends str
 };
 export type ConfirmEmailMutationResult = ApolloReactCommon.MutationResult<ConfirmEmailMutation>;
 export type ConfirmEmailMutationOptions = ApolloReactCommon.BaseMutationOptions<ConfirmEmailMutation, ConfirmEmailMutationVariables>;
+export const ForgotPasswordDocument = gql`
+    mutation ForgotPassword($email: String!) {
+  restorePassword(email: $email)
+}
+    `;
+export type ForgotPasswordMutationFn = ApolloReactCommon.MutationFunction<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
+export type ForgotPasswordComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<ForgotPasswordMutation, ForgotPasswordMutationVariables>, 'mutation'>;
+
+    export const ForgotPasswordComponent = (props: ForgotPasswordComponentProps) => (
+      <ApolloReactComponents.Mutation<ForgotPasswordMutation, ForgotPasswordMutationVariables> mutation={ForgotPasswordDocument} {...props} />
+    );
+    
+export type ForgotPasswordProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<ForgotPasswordMutation, ForgotPasswordMutationVariables>
+    } & TChildProps;
+export function withForgotPassword<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ForgotPasswordMutation,
+  ForgotPasswordMutationVariables,
+  ForgotPasswordProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, ForgotPasswordMutation, ForgotPasswordMutationVariables, ForgotPasswordProps<TChildProps, TDataName>>(ForgotPasswordDocument, {
+      alias: 'forgotPassword',
+      ...operationOptions
+    });
+};
+export type ForgotPasswordMutationResult = ApolloReactCommon.MutationResult<ForgotPasswordMutation>;
+export type ForgotPasswordMutationOptions = ApolloReactCommon.BaseMutationOptions<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -208,3 +300,31 @@ export function withRegister<TProps, TChildProps = {}, TDataName extends string 
 };
 export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const LoggedDocument = gql`
+    query Logged {
+  logged {
+    id
+    name
+  }
+}
+    `;
+export type LoggedComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<LoggedQuery, LoggedQueryVariables>, 'query'>;
+
+    export const LoggedComponent = (props: LoggedComponentProps) => (
+      <ApolloReactComponents.Query<LoggedQuery, LoggedQueryVariables> query={LoggedDocument} {...props} />
+    );
+    
+export type LoggedProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<LoggedQuery, LoggedQueryVariables>
+    } & TChildProps;
+export function withLogged<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  LoggedQuery,
+  LoggedQueryVariables,
+  LoggedProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, LoggedQuery, LoggedQueryVariables, LoggedProps<TChildProps, TDataName>>(LoggedDocument, {
+      alias: 'logged',
+      ...operationOptions
+    });
+};
+export type LoggedQueryResult = ApolloReactCommon.QueryResult<LoggedQuery, LoggedQueryVariables>;
