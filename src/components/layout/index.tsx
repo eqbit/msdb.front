@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { useSelector } from 'react-redux';
-import { Store } from '../types/store/store';
+import { Store } from '../../types/store/store';
 
 type Props = {
   title?: string
@@ -11,7 +11,7 @@ type Props = {
 const Layout: React.FunctionComponent<Props> = (
   {
     children,
-    title = 'Movie Suggestion DataBase',
+    title = 'Movie Suggestion DataBase'
   }
 ) => {
   const { user } = useSelector((store: Store) => store);
@@ -82,6 +82,6 @@ const Layout: React.FunctionComponent<Props> = (
     
     </>
   );
-}
+};
 
 export default Layout

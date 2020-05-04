@@ -7,7 +7,7 @@ import {
   ConfirmEmailMutationVariables
 } from '../../../src/generated/types.d';
 import { confirmEmailMutation } from '../../../graphql/user/mutations/confirmEmail';
-import Layout from '../../../src/components/Layout';
+import Layout from '../../../src/components/layout';
 import { useRouter } from 'next/router';
 
 type Props = {

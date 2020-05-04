@@ -1,7 +1,7 @@
 import React from 'react';
 import { LoggedComponent } from '../../../src/generated/types.d';
 import { withApollo } from '../../../lib/apollo';
-import Layout from '../../../src/components/Layout';
+import Layout from '../../../src/components/layout';
 
 const Hello = () => {
   return (

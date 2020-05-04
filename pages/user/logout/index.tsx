@@ -10,7 +10,7 @@ const Logout: NextPage = () => {
   
   useEffect(() => {
     router.push('/');
-  }, [])
+  }, []);
   
   return null;
 };

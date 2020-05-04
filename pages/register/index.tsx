@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Field, FormikHelpers } from 'formik';
-import Layout from '../../src/components/Layout';
+import Layout from '../../src/components/layout';
 import { withApollo } from '../../lib/apollo';
 import { RegisterComponent } from '../../src/generated/types.d';
 import TextInput from '../../src/components/form/text-input';

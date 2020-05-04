@@ -24,7 +24,7 @@ const ChangePassword: NextPage<Props> = ({ token }) => {
   const router = useRouter();
   
   return (
-    <Layout title="Change password page">
+    <layout title="Change password page">
       <ChangePasswordComponent>
         {(restorePassword) => {
           const onSubmit = async (data: Values, { setErrors }: FormikHelpers<Values>) => {
@@ -74,7 +74,7 @@ const ChangePassword: NextPage<Props> = ({ token }) => {
           );
         }}
       </ChangePasswordComponent>
-    </Layout>
+    </layout>
   )
 };
 

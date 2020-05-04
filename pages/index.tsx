@@ -1,6 +1,6 @@
 import React from 'react';
 import { withApollo } from '../lib/apollo'
-import Layout from '../src/components/Layout'
+import Layout from '../src/components/layout'
 
 const Home = () => {
   return (
