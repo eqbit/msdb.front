@@ -1,12 +1,12 @@
 import React from 'react';
 import { Formik, Field, FormikHelpers } from 'formik';
-import Layout from '../../../src/components/Layout';
 import { withApollo } from '../../../lib/apollo';
 import { ChangePasswordComponent } from '../../../src/generated/types.d';
 import TextInput from '../../../src/components/form/text-input';
 import { useRouter } from 'next/router';
 import { NextPage } from 'next';
 import { PageContext } from '../../../src/types';
+import Layout from '../../../src/components/layout';
 
 type Values = {
   password: string;
@@ -24,7 +24,7 @@ const ChangePassword: NextPage<Props> = ({ token }) => {
   const router = useRouter();
   
   return (
-    <layout title="Change password page">
+    <Layout title="Change password page">
       <ChangePasswordComponent>
         {(restorePassword) => {
           const onSubmit = async (data: Values, { setErrors }: FormikHelpers<Values>) => {
@@ -74,7 +74,7 @@ const ChangePassword: NextPage<Props> = ({ token }) => {
           );
         }}
       </ChangePasswordComponent>
-    </layout>
+    </Layout>
   )
 };
 

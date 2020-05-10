@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
 import * as React from 'react';
+import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactComponents from '@apollo/react-components';
 import * as ApolloReactHoc from '@apollo/react-hoc';
 export type Maybe<T> = T | null;
@@ -16,8 +16,39 @@ export type Scalars = {
 
 export type Query = {
    __typename?: 'Query';
+  getMovie?: Maybe<Movie>;
+  getMovies?: Maybe<Array<Movie>>;
+  countMovies?: Maybe<Scalars['Int']>;
   hello: Scalars['String'];
   logged?: Maybe<User>;
+};
+
+
+export type QueryGetMovieArgs = {
+  id: Scalars['Float'];
+};
+
+
+export type QueryGetMoviesArgs = {
+  page: Scalars['Float'];
+  itemsPerPage: Scalars['Float'];
+};
+
+export type Movie = {
+   __typename?: 'Movie';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  genre: Scalars['String'];
+  directedBy: Scalars['String'];
+  writtenBy: Scalars['String'];
+  description: Scalars['String'];
+  customDescription: Scalars['String'];
+  year: Scalars['Float'];
+  popularity: Scalars['Float'];
+  poster: Scalars['String'];
+  trailer: Scalars['String'];
+  tmdbId: Scalars['String'];
+  updated: Scalars['String'];
 };
 
 export type User = {
@@ -31,12 +62,25 @@ export type User = {
 
 export type Mutation = {
    __typename?: 'Mutation';
+  addMovie: Movie;
+  updateMovie?: Maybe<Movie>;
   register: User;
   login?: Maybe<User>;
   logout: Scalars['Boolean'];
   confirmEmail: Scalars['Boolean'];
   restorePassword: Scalars['Boolean'];
   changePassword?: Maybe<User>;
+};
+
+
+export type MutationAddMovieArgs = {
+  data: AddMovieInput;
+};
+
+
+export type MutationUpdateMovieArgs = {
+  data: AddMovieInput;
+  id: Scalars['Float'];
 };
 
 
@@ -65,6 +109,21 @@ export type MutationChangePasswordArgs = {
   data: ChangePasswordInput;
 };
 
+export type AddMovieInput = {
+  name: Scalars['String'];
+  genre: Scalars['String'];
+  directedBy?: Maybe<Scalars['String']>;
+  writtenBy?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  customDescription?: Maybe<Scalars['String']>;
+  year?: Maybe<Scalars['Float']>;
+  popularity?: Maybe<Scalars['Float']>;
+  poster?: Maybe<Scalars['String']>;
+  trailer?: Maybe<Scalars['String']>;
+  tmdbId?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
+};
+
 export type RegisterInput = {
   password: Scalars['String'];
   firstName: Scalars['String'];
@@ -76,6 +135,33 @@ export type ChangePasswordInput = {
   password: Scalars['String'];
   token: Scalars['String'];
 };
+
+export type GetMovieQueryVariables = {
+  id: Scalars['Float'];
+};
+
+
+export type GetMovieQuery = (
+  { __typename?: 'Query' }
+  & { getMovie?: Maybe<(
+    { __typename?: 'Movie' }
+    & Pick<Movie, 'name' | 'id' | 'genre' | 'year' | 'trailer' | 'popularity' | 'description' | 'poster'>
+  )> }
+);
+
+export type GetMoviesQueryVariables = {
+  itemsPerPage: Scalars['Float'];
+  page: Scalars['Float'];
+};
+
+
+export type GetMoviesQuery = (
+  { __typename?: 'Query' }
+  & { getMovies?: Maybe<Array<(
+    { __typename?: 'Movie' }
+    & Pick<Movie, 'name' | 'id' | 'genre' | 'year' | 'trailer' | 'popularity' | 'description' | 'poster'>
+  )>> }
+);
 
 export type ChangePasswordMutationVariables = {
   data: ChangePasswordInput;
@@ -124,6 +210,14 @@ export type LoginMutation = (
   )> }
 );
 
+export type LogoutMutationVariables = {};
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'logout'>
+);
+
 export type RegisterMutationVariables = {
   data: RegisterInput;
 };
@@ -144,11 +238,79 @@ export type LoggedQuery = (
   { __typename?: 'Query' }
   & { logged?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name'>
+    & Pick<User, 'id' | 'firstName' | 'lastName' | 'email' | 'name'>
   )> }
 );
 
 
+export const GetMovieDocument = gql`
+    query GetMovie($id: Float!) {
+  getMovie(id: $id) {
+    name
+    id
+    genre
+    year
+    trailer
+    popularity
+    description
+    poster
+  }
+}
+    `;
+export type GetMovieComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<GetMovieQuery, GetMovieQueryVariables>, 'query'> & ({ variables: GetMovieQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const GetMovieComponent = (props: GetMovieComponentProps) => (
+      <ApolloReactComponents.Query<GetMovieQuery, GetMovieQueryVariables> query={GetMovieDocument} {...props} />
+    );
+    
+export type GetMovieProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<GetMovieQuery, GetMovieQueryVariables>
+    } & TChildProps;
+export function withGetMovie<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  GetMovieQuery,
+  GetMovieQueryVariables,
+  GetMovieProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, GetMovieQuery, GetMovieQueryVariables, GetMovieProps<TChildProps, TDataName>>(GetMovieDocument, {
+      alias: 'getMovie',
+      ...operationOptions
+    });
+};
+export type GetMovieQueryResult = ApolloReactCommon.QueryResult<GetMovieQuery, GetMovieQueryVariables>;
+export const GetMoviesDocument = gql`
+    query GetMovies($itemsPerPage: Float!, $page: Float!) {
+  getMovies(itemsPerPage: $itemsPerPage, page: $page) {
+    name
+    id
+    genre
+    year
+    trailer
+    popularity
+    description
+    poster
+  }
+}
+    `;
+export type GetMoviesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<GetMoviesQuery, GetMoviesQueryVariables>, 'query'> & ({ variables: GetMoviesQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const GetMoviesComponent = (props: GetMoviesComponentProps) => (
+      <ApolloReactComponents.Query<GetMoviesQuery, GetMoviesQueryVariables> query={GetMoviesDocument} {...props} />
+    );
+    
+export type GetMoviesProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<GetMoviesQuery, GetMoviesQueryVariables>
+    } & TChildProps;
+export function withGetMovies<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  GetMoviesQuery,
+  GetMoviesQueryVariables,
+  GetMoviesProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, GetMoviesQuery, GetMoviesQueryVariables, GetMoviesProps<TChildProps, TDataName>>(GetMoviesDocument, {
+      alias: 'getMovies',
+      ...operationOptions
+    });
+};
+export type GetMoviesQueryResult = ApolloReactCommon.QueryResult<GetMoviesQuery, GetMoviesQueryVariables>;
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($data: ChangePasswordInput!) {
   changePassword(data: $data) {
@@ -267,6 +429,33 @@ export function withLogin<TProps, TChildProps = {}, TDataName extends string = '
 };
 export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
 export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
+}
+    `;
+export type LogoutMutationFn = ApolloReactCommon.MutationFunction<LogoutMutation, LogoutMutationVariables>;
+export type LogoutComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<LogoutMutation, LogoutMutationVariables>, 'mutation'>;
+
+    export const LogoutComponent = (props: LogoutComponentProps) => (
+      <ApolloReactComponents.Mutation<LogoutMutation, LogoutMutationVariables> mutation={LogoutDocument} {...props} />
+    );
+    
+export type LogoutProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
+      [key in TDataName]: ApolloReactCommon.MutationFunction<LogoutMutation, LogoutMutationVariables>
+    } & TChildProps;
+export function withLogout<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  LogoutMutation,
+  LogoutMutationVariables,
+  LogoutProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withMutation<TProps, LogoutMutation, LogoutMutationVariables, LogoutProps<TChildProps, TDataName>>(LogoutDocument, {
+      alias: 'logout',
+      ...operationOptions
+    });
+};
+export type LogoutMutationResult = ApolloReactCommon.MutationResult<LogoutMutation>;
+export type LogoutMutationOptions = ApolloReactCommon.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const RegisterDocument = gql`
     mutation Register($data: RegisterInput!) {
   register(data: $data) {
@@ -304,6 +493,9 @@ export const LoggedDocument = gql`
     query Logged {
   logged {
     id
+    firstName
+    lastName
+    email
     name
   }
 }

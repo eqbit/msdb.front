@@ -1,4 +1,14 @@
 
+declare module '*/getMovie.ts' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GetMovie: DocumentNode;
+export const GetMovies: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/changePassword.ts' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -30,6 +40,15 @@ declare module '*/login.ts' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const Login: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/logout.ts' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Logout: DocumentNode;
 
   export default defaultDocument;
 }
