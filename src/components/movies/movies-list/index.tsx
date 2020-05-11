@@ -27,9 +27,9 @@ const MoviesList: React.FC = () => {
           <>
             <ul className="movies-list">
               {data?.getMovies && data.getMovies.map((movie) => (
-                <Link href={`movie/${movie.id}`}>
-                  <a>
-                    <li key={movie.id} className="movies-list__item">
+                <li key={movie.id}>
+                  <Link href={`movie/${movie.id}`}>
+                    <a className="movies-list__item">
                       <h2 className="movies-list__title">{movie.name}</h2>
                       <figure className="movies-list__img">
                         <div className="movies-list__rating">{movie.popularity}</div>
@@ -38,12 +38,12 @@ const MoviesList: React.FC = () => {
                       <blockquote className="movies-list__description">
                         <p>{cutText(movie.description, 80, true)}</p>
                       </blockquote>
-                    </li>
-                  </a>
-                </Link>
+                    </a>
+                  </Link>
+                </li>
               ))}
             </ul>
-          
+            
             <button onClick={loadMore}>Load more</button>
           </>
         )
