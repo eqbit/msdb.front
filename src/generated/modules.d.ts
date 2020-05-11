@@ -4,6 +4,7 @@ declare module '*/getMovie.ts' {
   const defaultDocument: DocumentNode;
   export const GetMovie: DocumentNode;
 export const GetMovies: DocumentNode;
+export const GetSimilarMovies: DocumentNode;
 
   export default defaultDocument;
 }

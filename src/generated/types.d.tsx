@@ -19,6 +19,7 @@ export type Query = {
   getMovie?: Maybe<Movie>;
   getMovies?: Maybe<Array<Movie>>;
   countMovies?: Maybe<Scalars['Int']>;
+  getSimilarMovies?: Maybe<Array<Movie>>;
   hello: Scalars['String'];
   logged?: Maybe<User>;
 };
@@ -32,6 +33,11 @@ export type QueryGetMovieArgs = {
 export type QueryGetMoviesArgs = {
   page: Scalars['Float'];
   itemsPerPage: Scalars['Float'];
+};
+
+
+export type QueryGetSimilarMoviesArgs = {
+  id: Scalars['Float'];
 };
 
 export type Movie = {
@@ -145,7 +151,7 @@ export type GetMovieQuery = (
   { __typename?: 'Query' }
   & { getMovie?: Maybe<(
     { __typename?: 'Movie' }
-    & Pick<Movie, 'name' | 'id' | 'genre' | 'year' | 'trailer' | 'popularity' | 'description' | 'poster'>
+    & Pick<Movie, 'name' | 'id' | 'genre' | 'year' | 'trailer' | 'popularity' | 'description' | 'poster' | 'tmdbId'>
   )> }
 );
 
@@ -159,7 +165,20 @@ export type GetMoviesQuery = (
   { __typename?: 'Query' }
   & { getMovies?: Maybe<Array<(
     { __typename?: 'Movie' }
-    & Pick<Movie, 'name' | 'id' | 'genre' | 'year' | 'trailer' | 'popularity' | 'description' | 'poster'>
+    & Pick<Movie, 'name' | 'id' | 'genre' | 'year' | 'trailer' | 'popularity' | 'description' | 'poster' | 'tmdbId'>
+  )>> }
+);
+
+export type GetSimilarMoviesQueryVariables = {
+  id: Scalars['Float'];
+};
+
+
+export type GetSimilarMoviesQuery = (
+  { __typename?: 'Query' }
+  & { getSimilarMovies?: Maybe<Array<(
+    { __typename?: 'Movie' }
+    & Pick<Movie, 'name' | 'id' | 'genre' | 'year' | 'trailer' | 'popularity' | 'description' | 'poster' | 'tmdbId'>
   )>> }
 );
 
@@ -254,6 +273,7 @@ export const GetMovieDocument = gql`
     popularity
     description
     poster
+    tmdbId
   }
 }
     `;
@@ -288,6 +308,7 @@ export const GetMoviesDocument = gql`
     popularity
     description
     poster
+    tmdbId
   }
 }
     `;
@@ -311,6 +332,41 @@ export function withGetMovies<TProps, TChildProps = {}, TDataName extends string
     });
 };
 export type GetMoviesQueryResult = ApolloReactCommon.QueryResult<GetMoviesQuery, GetMoviesQueryVariables>;
+export const GetSimilarMoviesDocument = gql`
+    query GetSimilarMovies($id: Float!) {
+  getSimilarMovies(id: $id) {
+    name
+    id
+    genre
+    year
+    trailer
+    popularity
+    description
+    poster
+    tmdbId
+  }
+}
+    `;
+export type GetSimilarMoviesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<GetSimilarMoviesQuery, GetSimilarMoviesQueryVariables>, 'query'> & ({ variables: GetSimilarMoviesQueryVariables; skip?: boolean; } | { skip: boolean; });
+
+    export const GetSimilarMoviesComponent = (props: GetSimilarMoviesComponentProps) => (
+      <ApolloReactComponents.Query<GetSimilarMoviesQuery, GetSimilarMoviesQueryVariables> query={GetSimilarMoviesDocument} {...props} />
+    );
+    
+export type GetSimilarMoviesProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<GetSimilarMoviesQuery, GetSimilarMoviesQueryVariables>
+    } & TChildProps;
+export function withGetSimilarMovies<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  GetSimilarMoviesQuery,
+  GetSimilarMoviesQueryVariables,
+  GetSimilarMoviesProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, GetSimilarMoviesQuery, GetSimilarMoviesQueryVariables, GetSimilarMoviesProps<TChildProps, TDataName>>(GetSimilarMoviesDocument, {
+      alias: 'getSimilarMovies',
+      ...operationOptions
+    });
+};
+export type GetSimilarMoviesQueryResult = ApolloReactCommon.QueryResult<GetSimilarMoviesQuery, GetSimilarMoviesQueryVariables>;
 export const ChangePasswordDocument = gql`
     mutation ChangePassword($data: ChangePasswordInput!) {
   changePassword(data: $data) {

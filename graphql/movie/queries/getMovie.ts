@@ -11,6 +11,7 @@ export const getMovieQuery = gql`
             popularity
             description
             poster
+            tmdbId
         }
     }
 `;
@@ -26,6 +27,23 @@ export const getMoviesQuery = gql`
             popularity
             description
             poster
+            tmdbId
+        }
+    }
+`;
+
+export const getSimilarMoviesQuery = gql`
+    query GetSimilarMovies($id: Float!) {
+        getSimilarMovies(id: $id) {
+            name
+            id
+            genre
+            year
+            trailer
+            popularity
+            description
+            poster
+            tmdbId
         }
     }
 `;
