@@ -23,60 +23,48 @@ const Layout: React.FunctionComponent<Props> = (
         <meta charSet="utf-8"/>
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
       </Head>
+      
       <div className="wrapper">
-        <header>
-          <div style={
-            {
-              width: '1200px',
-              margin: 'auto'
-            }
-          }>
-            <nav>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-              {' '}
-              <Link href="/user/login">
-                <a>Login</a>
-              </Link>
-              {' '}
-              <Link href="/user/register">
-                <a>Register</a>
-              </Link>
-              {' '}
-              <Link href="/user/forgot-password">
-                <a>Restore password</a>
-              </Link>
-              {' '}
-              <Link href="/user/hello">
-                <a>Hello</a>
-              </Link>
-              {' '}
-              {user.isLoggedIn && (
-                <Link href="/user/logout">
-                  <a>Logout</a>
+        <header className="header">
+          <div className="container">
+            <nav className="header__nav">
+              <div className="header__logo">
+                <Link href="/">
+                  <a className="logo">MSDB</a>
                 </Link>
-              )}
+              </div>
+              
+              <div className="header-user">
+                {user.isLoggedIn ? (
+                  <Link href="/user/logout">
+                    <a className="header-user__login">Выйти</a>
+                  </Link>
+                ) : (
+                  <>
+                    <Link href="/user/register">
+                      <a className="header-user__login">Register</a>
+                    </Link>
+      
+                    <Link href="/user/login">
+                      <a className="header-user__login">Войти</a>
+                    </Link>
+                  </>
+                )}
+              </div>
             </nav>
           </div>
         </header>
         
-        <div className="content" style={
-          {
-            width: '1200px',
-            margin: '50px auto'
-          }
-        }>
+        <div className="content">
           {children}
         </div>
         
-        <footer style={
-          {
-            width: '1200px',
-            margin: 'auto'
-          }
-        }>
-          <span>Footer</span>
+        <footer className="footer">
+          <div className="container">
+            <div className="footer__row">
+              Movie Suggestion DataBase © 2020
+            </div>
+          </div>
         </footer>
       </div>
     
