@@ -22,6 +22,7 @@ const Layout: React.FunctionComponent<Props> = (
         <title>{title}</title>
         <meta charSet="utf-8"/>
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"/>
       </Head>
       
       <div className="wrapper">
@@ -37,7 +38,7 @@ const Layout: React.FunctionComponent<Props> = (
               <div className="header-user">
                 {user.isLoggedIn ? (
                   <Link href="/user/logout">
-                    <a className="header-user__login">Выйти</a>
+                    <a className="header-user__login">Выход</a>
                   </Link>
                 ) : (
                   <>
@@ -46,7 +47,7 @@ const Layout: React.FunctionComponent<Props> = (
                     </Link>
       
                     <Link href="/user/login">
-                      <a className="header-user__login">Войти</a>
+                      <a className="header-user__login">Вход</a>
                     </Link>
                   </>
                 )}

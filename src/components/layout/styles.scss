@@ -1,0 +1,30 @@
+.header {
+  background: #333;
+  padding: 15px 0;
+  color: #FFF;
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  &-user {
+    &__login {
+      padding: 5px 10px;
+      display: inline-block;
+      background: transparent;
+      transition: .3s;
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(#FFF, .1);
+      }
+    }
+  }
+}

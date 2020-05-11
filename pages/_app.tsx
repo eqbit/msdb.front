@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import withRedux from 'next-redux-wrapper';
 import { initializeStore } from '../src/redux/store';
 import CheckAuth from '../src/components/utils';
+import '../src/styles/index.scss';
 
 class MyApp extends App<any> {
   render() {
