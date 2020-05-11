@@ -1,10 +1,10 @@
 import React from 'react';
 import { Formik, Field, FormikHelpers } from 'formik';
-import Layout from '../../src/components/layout';
-import { withApollo } from '../../lib/apollo';
-import { ForgotPasswordComponent } from '../../src/generated/types.d';
-import TextInput from '../../src/components/form/text-input';
 import { useRouter } from 'next/router';
+import Layout from '../../../src/components/layout';
+import { withApollo } from '../../../lib/apollo';
+import { ForgotPasswordComponent } from '../../../src/generated/types.d';
+import TextInput from '../../../src/components/form/text-input';
 
 type Values = {
   email: string;

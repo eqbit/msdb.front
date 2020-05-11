@@ -1,13 +1,13 @@
 import React from 'react';
 import { Formik, Field, FormikHelpers } from 'formik';
-import Layout from '../../src/components/layout';
-import { withApollo } from '../../lib/apollo';
-import { LoggedQuery, LoginComponent } from '../../src/generated/types.d';
-import TextInput from '../../src/components/form/text-input';
-import { useRouter } from 'next/router';
-import { helloQuery } from '../../graphql/user/queries/hello';
 import { useDispatch } from 'react-redux';
-import { setUserLoggedStatus } from '../../src/redux/actions/user';
+import { useRouter } from 'next/router';
+import Layout from '../../../src/components/layout';
+import { withApollo } from '../../../lib/apollo';
+import { LoggedQuery, LoginComponent } from '../../../src/generated/types.d';
+import TextInput from '../../../src/components/form/text-input';
+import { helloQuery } from '../../../graphql/user/queries/hello';
+import { setUserLoggedStatus } from '../../../src/redux/actions/user';
 
 type Values = {
   email: string;

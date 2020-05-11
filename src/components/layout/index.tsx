@@ -36,15 +36,15 @@ const Layout: React.FunctionComponent<Props> = (
                 <a>Home</a>
               </Link>
               {' '}
-              <Link href="/login">
+              <Link href="/user/login">
                 <a>Login</a>
               </Link>
               {' '}
-              <Link href="/register">
+              <Link href="/user/register">
                 <a>Register</a>
               </Link>
               {' '}
-              <Link href="/forgot-password">
+              <Link href="/user/forgot-password">
                 <a>Restore password</a>
               </Link>
               {' '}
