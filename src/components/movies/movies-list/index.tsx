@@ -28,17 +28,21 @@ const MoviesList: React.FC = () => {
             <div className="container">
               <ul className="movies-list">
                 {data?.getMovies && data.getMovies.map((movie) => (
-                  <li key={movie.id}>
+                  <li key={movie.id} className="movies-list__item">
                     <Link href={`movie/${movie.id}`}>
-                      <a className="movies-list__item">
-                        <h2 className="movies-list__title">{movie.name}</h2>
-                        <figure className="movies-list__img">
-                          <div className="movies-list__rating">{movie.popularity}</div>
-                          <img src={movie.poster} alt=""/>
-                        </figure>
-                        <blockquote className="movies-list__description">
-                          <p>{cutText(movie.description, 80, true)}</p>
-                        </blockquote>
+                      <a className="movies-list__link" style={{backgroundImage: `url('${movie.poster}')`}}>
+                        <div className="movies-list__rating">
+                          <span>Рейтинг&nbsp;популярности</span>
+                          <span>{movie.popularity}<small>pts</small></span>
+                        </div>
+                        
+                        <div className="movies-list__meta">
+                          <h2 className="movies-list__title">{movie.name}</h2>
+                          
+                          <p className="movies-list__description">
+                            {cutText(movie.description, 80, true)}
+                          </p>
+                        </div>
                       </a>
                     </Link>
                   </li>
