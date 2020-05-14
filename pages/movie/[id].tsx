@@ -13,7 +13,7 @@ const Movie: NextPage<Props> = ({ id }) => {
   return (
     <Layout title="Movie">
       {id ? (
-        <MovieDetail id={id}/>
+        <MovieDetail id={+id}/>
       ) : (
         <span>404</span>
       )}

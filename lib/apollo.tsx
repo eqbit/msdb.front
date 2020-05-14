@@ -96,7 +96,7 @@ export const withApollo = ({ ssr = false } = {}) => (PageComponent: PageComponen
             
             await getDataFromTree(<AppTree {...props} />)
           } catch (error) {
-            console.error('Error while running `getDataFromTree`', error)
+            console.error('Error while running `getDataFromTree`', error.message)
           }
           
           Head.rewind()
