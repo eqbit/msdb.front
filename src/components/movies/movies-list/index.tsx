@@ -25,26 +25,29 @@ const MoviesList: React.FC = () => {
         
         return (
           <>
-            <ul className="movies-list">
-              {data?.getMovies && data.getMovies.map((movie) => (
-                <li key={movie.id}>
-                  <Link href={`movie/${movie.id}`}>
-                    <a className="movies-list__item">
-                      <h2 className="movies-list__title">{movie.name}</h2>
-                      <figure className="movies-list__img">
-                        <div className="movies-list__rating">{movie.popularity}</div>
-                        <img src={movie.poster} alt=""/>
-                      </figure>
-                      <blockquote className="movies-list__description">
-                        <p>{cutText(movie.description, 80, true)}</p>
-                      </blockquote>
-                    </a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="container">
+              <ul className="movies-list">
+                {data?.getMovies && data.getMovies.map((movie) => (
+                  <li key={movie.id}>
+                    <Link href={`movie/${movie.id}`}>
+                      <a className="movies-list__item">
+                        <h2 className="movies-list__title">{movie.name}</h2>
+                        <figure className="movies-list__img">
+                          <div className="movies-list__rating">{movie.popularity}</div>
+                          <img src={movie.poster} alt=""/>
+                        </figure>
+                        <blockquote className="movies-list__description">
+                          <p>{cutText(movie.description, 80, true)}</p>
+                        </blockquote>
+                      </a>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              
+              <button onClick={loadMore}>Load more</button>
+            </div>
             
-            <button onClick={loadMore}>Load more</button>
           </>
         )
       }}

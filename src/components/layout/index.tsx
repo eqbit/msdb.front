@@ -43,7 +43,7 @@ const Layout: React.FunctionComponent<Props> = (
                 ) : (
                   <>
                     <Link href="/user/register">
-                      <a className="header-user__login">Register</a>
+                      <a className="header-user__login">Регистрация</a>
                     </Link>
       
                     <Link href="/user/login">
