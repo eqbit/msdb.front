@@ -1,0 +1,8 @@
+.movie-detail {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 300px 1fr;
+  padding: 20px;
+  background: #FFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+}
