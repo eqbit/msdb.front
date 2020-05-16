@@ -12,11 +12,11 @@ type Props = {
 const Movie: NextPage<Props> = ({ id }) => {
   return (
     <Layout title="Movie">
-      {id ? (
-        <MovieDetail id={+id}/>
-      ) : (
-        <span>404</span>
-      )}
+      {
+        id
+          ? <MovieDetail id={+id}/>
+          : <span>404</span>
+      }
     </Layout>
   )
 };

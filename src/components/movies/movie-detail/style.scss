@@ -3,6 +3,24 @@
   grid-gap: 20px;
   grid-template-columns: 300px 1fr;
   padding: 20px;
-  background: #FFF;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  background: #313131;
+  box-shadow: 0 0 10px $neon-light;
+  color: #FFF;
+
+  &__title {
+    font-family: $secondary-font;
+    font-size: 24px;
+  }
+
+  &-genres {
+    display: flex;
+    margin: 13px -2px -2px;
+
+    &__item {
+      margin: 2px;
+      font-size: 12px;
+      padding: 5px;
+      background: $neon-light;
+    }
+  }
 }

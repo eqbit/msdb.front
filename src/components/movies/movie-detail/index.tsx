@@ -1,6 +1,5 @@
 import React from 'react';
-
-import SimilarMovies from '../simular-movies';
+// import SimilarMovies from '../simular-movies';
 import Detail from './detail';
 
 type Props = {
@@ -11,7 +10,7 @@ const MovieDetail: React.FC<Props> = ({ id }) => {
   return (
     <>
       <Detail id={id}/>
-      <SimilarMovies id={id}/>
+      {/*<SimilarMovies id={id}/>*/}
     </>
   )
 };
